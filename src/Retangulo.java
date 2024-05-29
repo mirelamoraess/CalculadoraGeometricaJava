@@ -1,29 +1,27 @@
 public class Retangulo {
+    double base, altura, area, perimetro;
 
-    double base;
-    double altura;
-
-    public Retangulo(double base, double altura) {
+    public Retangulo(double base, double altura){
         this.base = base;
         this.altura = altura;
     }
 
-    double calcularArea (){
-        return this.base * this.altura;
-
+    public double calcularArea(){
+        area = base*altura;
+        return area;
     }
 
-    double calcularPerimetro(){
-        return (2 * this.base) + (2 * this.altura);
+    public double calcularPerimetro(){
+        perimetro = (2*base) + (2*altura);
+        return perimetro;
     }
 
-    String retornaResumoForma(int valor) {
-        String resumo = String.format("O retangulo de base %.2f e altura %.2f, tem a area de %.2f e o perimetro de %.2f", this.base, this.altura, this.calcularArea(), this.calcularPerimetro());
+    public String resumoRetangulo(int numero){
+        String resumo = String.format("\nA área do retângulo é: %.2f\nO perímetro do retângulo: %.2f\n", area, perimetro);
 
-        if (valor % 2 == 0) {
+        if (resumo.length() %2 ==0){
             return resumo.toUpperCase();
         }
         return resumo.toLowerCase();
-
     }
 }

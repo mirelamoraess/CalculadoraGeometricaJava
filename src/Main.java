@@ -1,278 +1,272 @@
+import org.w3c.dom.css.CSSImportRule;
+
+import javax.sound.midi.SysexMessage;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static sun.util.locale.LocaleUtils.isNumeric;
 
 public class Main {
-//fsimbols.com
-
     public static void main(String[] args) {
+
+        //criei o objeto scanner para ler a entrada dos dados
         Scanner leia = new Scanner(System.in);
 
-        System.out.print("Insira seu nome: ");
-        String nome = leia.nextLine();
+        //declarei a varivél string
+        String nome;
+        int tipoFigura, tipoFiguraPlana, tipoFiguraEspacial;
 
-        System.out.println("Bem vindo(a) " + nome);
+        //entrada dos dados
+        System.out.print("Entre com seu nome: ");
+        nome = leia.next();
 
-        System.out.print("\nEscolha uma opção: \n1 - Formas Planas \n2 - Formas Espaciais\n");
-        int opt = leia.nextInt();
+        while (true){
 
-        if (opt == 1) {
-            System.out.print("\nEscolha uma opção: \n1 - Quadrado \n2 - Retângulo \n3 - Triângulo \n4 - Círculo \n5 - Hexágono \n6 - Sair\n");
-            int opt2 = leia.nextInt();
+            try{
+                System.out.print("\n ------ Entre com a opção da figura que deseja! ------ \n");
+                System.out.print(" 1 - Figuras Planas\n 2 - Figuras Espaciais\n\n Entre com o número da opção:");
+                tipoFigura = leia.nextInt();
 
-            switch (opt2) {
+                if (tipoFigura == 1) {
+                    System.out.print(" \nBem-Vindo: " + nome + "\nEscolha umas das opções abaixo para calcúlo de figura plana");
+                    System.out.print("\n 1 - Quadrado\n 2 - Retângulo\n 3 - Triângulo Equilátero\n 4 - Circulo\n 5 - Hexágono Regular\n 6 - Sair");
+                    System.out.print("\n Entre com a opção: ");
+                    tipoFiguraPlana = leia.nextInt();
 
-                case 1:
-                    while (true){
-                        try{
-                            System.out.println(nome + ", insira a medida do lado do quadrado: ");
-                            double lado = leia.nextDouble();
-                            if (lado <= 0) {
-                                    throw new IllegalArgumentException("O número deve ser maior que zero.");}
-                            else{
-                                Quadrado quadrado = new Quadrado(lado);
-                                System.out.println(quadrado.calcularArea());
-                                System.out.println(quadrado.calcularPerimetro());
-                                System.out.println(quadrado.retornaResumoForma(10));}
-                            }
-                        catch (Exception e) {
-                        System.out.println("Entrada inválida. Certifique-se de inserir um número positivo.");
-                        leia.nextLine();
-                        }
-                    }
+                    switch (tipoFiguraPlana) {
+                        case 1:
+                            //declaração das varivel
+                            double lado;
 
+                            //entrada dos dados
+                            System.out.print("Entre com o lado do quadrado: ");
+                            lado = leia.nextDouble();
 
+                            //criação do objeto e passadno parametro para construtor
+                            Quadrado quadrado = new Quadrado(lado);
+                            System.out.print("\nÁrea: " + quadrado.calcularArea());
+                            System.out.print("\nPerímetro: " + quadrado.calcularPerimetro());
+                            System.out.print(quadrado.resumoQuadrado(2));
 
-                case 2:
-                    while (true) {
-                        try {
-                            System.out.println(nome + ", insira a medida da base do retângulo: ");
-                            double base = leia.nextDouble();
-                            System.out.println("Insira a medida da altura do retângulo: ");
-                            double altura = leia.nextDouble();
-                            if (base <= 0 || altura <= 0) {
-                                throw new IllegalArgumentException("O número deve ser maior que zero.");
-                            } else {
-                                Retangulo retangulo = new Retangulo(base, altura);
-                                System.out.println(retangulo.calcularArea());
-                                System.out.println(retangulo.calcularPerimetro());
-                                System.out.println(retangulo.retornaResumoForma(10));
-                            }
-                        } catch (Exception e) {
-                            System.out.println("Entrada inválida. Certifique-se de inserir um número positivo.");
-                            leia.nextLine();
-                        }
-                    }
+                            break;
+                        case 2:
 
-                case 3:
-                    while (true) {
-                        try {
-                            System.out.println(nome + ", insira a medida do lado do triângulo: ");
-                            double ladoTriangulo = leia.nextDouble();
-                            if (ladoTriangulo <= 0) {
-                                throw new IllegalArgumentException("O número deve ser maior que zero.");
-                            } else {
-                                TrianguloEquilatero trianguloEquilatero = new TrianguloEquilatero(ladoTriangulo);
-                                System.out.println(trianguloEquilatero.calcularArea());
-                                System.out.println(trianguloEquilatero.calcularPerimetro());
-                                System.out.println(trianguloEquilatero.retornaResumoForma(10));
-                            }
-                        } catch (Exception e) {
-                            System.out.println("Entrada inválida. Certifique-se de inserir um número positivo.");
-                            leia.nextLine();
-                        }
-                    }
+                            //declaração das variaveis
+                            double base, altura;
 
+                            //entrada dos dados da base
+                            System.out.print("Entre com a base: ");
+                            base = leia.nextDouble();
 
-                case 4:
-                    while (true) {
-                        try {
-                            System.out.println(nome + ", insira a medida do raio do círculo: ");
-                            double raio = leia.nextDouble();
-                            if (raio <= 0) {
-                                throw new IllegalArgumentException("O número deve ser maior que zero.");
-                            } else {
-                                Circulo circulo = new Circulo(raio);
-                                System.out.println(circulo.calcularArea());
-                                System.out.println(circulo.calcularPerimetro());
-                                System.out.println(circulo.retornaResumoForma(10));
-                            }
-                        } catch (Exception e) {
-                            System.out.println("Entrada inválida. Certifique-se de inserir um número positivo.");
-                            leia.nextLine();
-                        }
-                    }
+                            //entrada dos dados da altura
+                            System.out.print("Entre com a altura: ");
+                            altura = leia.nextDouble();
+
+                            //criação do objeto do tipo retangulo, passando parametro para construtor
+                            Retangulo retangulo = new Retangulo(base, altura);
+
+                            //saída, impresso na tela com a chamada dos metodos
+                            System.out.print("\nÁrea: " + retangulo.calcularArea());
+                            System.out.print("\nPerímetro: " + retangulo.calcularPerimetro());
+                            System.out.print(retangulo.resumoRetangulo(3));
+
+                            break;
+                        case 3:
+
+                            //declaração das variveis
+                            double ladoTriangulo;
+
+                            //entrada dos dados do usuário
+                            System.out.print("Entre com o lado do triângulo equilatero: ");
+                            ladoTriangulo = leia.nextDouble();
+
+                            //criação do objeto, passando parametro
+                            TranguloEquilatero triangulo = new TranguloEquilatero(ladoTriangulo);
+
+                            //saída, impresso na tela com a chamada dos metodos
+                            System.out.print("\nÁrea: " + triangulo.calcularArea());
+                            System.out.print("\nPerímetro: " + triangulo.calcularPerimetro());
+                            System.out.print(triangulo.resumoTrianguloEquilatero(2));
+                            break;
+                        case 4:
+
+                            //declaração da variavel
+                            double raio;
+
+                            System.out.print("Entre com o raio do circulo: ");
+                            raio = leia.nextDouble();
+
+                            Circulo circulo = new Circulo(raio);
+
+                            //saida impressa na tela com a chamada dos metodos
+                            System.out.print("\nÁrea: " + circulo.calcularArea());
+                            System.out.print("\nPerímetro: " + circulo.calcularPerimetro());
+                            System.out.print(circulo.resumoCirculo(3));
 
 
-                case 5:
-                    while (true) {
-                        try {
-                            System.out.println(nome + ", insira a medida do lado do hexágono: ");
-                            double ladoHex = leia.nextDouble();
-                            if (ladoHex <= 0) {
-                                throw new IllegalArgumentException("O número deve ser maior que zero.");
-                            } else {
-                                HexagonoRegular hexagonoRegular = new HexagonoRegular(ladoHex);
-                                System.out.println(hexagonoRegular.calcularArea());
-                                System.out.println(hexagonoRegular.calcularPerimetro());
-                                System.out.println(hexagonoRegular.retornaResumoForma(10));
-                            }
-                        } catch (Exception e) {
-                            System.out.println("Entrada inválida. Certifique-se de inserir um número positivo.");
-                            leia.nextLine();
-                        }
-                    }
+                            break;
+                        case 5:
+                            //declaração de variavel
+                            double ladoHexagono;
 
+                            //input do usuário
+                            System.out.print("Entre com o lado do hexagóno regular: ");
+                            ladoHexagono = leia.nextDouble();
 
-                case 6:
-                    break;
+                            HexagonoRegular regular = new HexagonoRegular(ladoHexagono);
 
-            }}
+                            //saida impressa na tela com a chamada dos metodos
+                            System.out.print("\nÁrea: " + regular.calcularArea());
+                            System.out.print("\nPerímetro: " + regular.calcularPerimetro());
+                            System.out.print(regular.resumoHexagono(2));
 
-            if (opt == 2) {
-                System.out.print("Escolha uma opção: \n1 - Cubo \n2 - Paralelepípedo \n3 - Cilindro \n4 - Cone \n5 - Pirâmide de Base Quadrada \n6 - Esfera \n7 - Sair\n");
-                int opt3 = leia.nextInt();
-
-                switch (opt3) {
-                    case 1:
-                        while (true) {
-                            try {
-                                System.out.println(nome + ", insira a medida do lado do cubo: ");
-                                double lado = leia.nextDouble();
-                                if (lado <= 0) {
-                                    throw new IllegalArgumentException("O número deve ser maior que zero.");
-                                } else {
-                                    Cubo cubo = new Cubo(lado);
-                                    System.out.println(cubo.calcularVolume());
-                                    System.out.println(cubo.calcularAreaSuperficial());
-                                    System.out.println(cubo.retornaResumoForma(10));
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Entrada inválida. Certifique-se de inserir um número positivo.");
-                                leia.nextLine();
-                            }
-                        }
-
-
-                    case 2:
-                        while (true) {
-                            try {
-                                System.out.println(nome + ", insira a medida do comprimento do paralelepípedo: ");
-                                double comprimento = leia.nextDouble();
-
-                                System.out.println("Insira a medida da largura: ");
-                                double largura = leia.nextDouble();
-
-                                System.out.println("Insira a medida da altura: ");
-                                double altura = leia.nextDouble();
-                                if (comprimento <= 0 || largura <= 0 || altura <= 0) {
-                                    throw new IllegalArgumentException("O número deve ser maior que zero.");
-                                } else {
-                                    Paralelepipedo paralelepipedo = new Paralelepipedo(comprimento, largura, altura);
-                                    System.out.println(paralelepipedo.calcularVolume());
-                                    System.out.println(paralelepipedo.calcularAreaSuperficial());
-                                    System.out.println(paralelepipedo.retornaResumoForma(10));
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Entrada inválida. Certifique-se de inserir um número positivo.");
-                                leia.nextLine();
-                            }
-                        }
-
-                    case 3:
-                        while (true) {
-                            try {
-                                System.out.println(nome + ", insira a medida do raio do cilindro: ");
-                                double raio = leia.nextDouble();
-
-                                System.out.println("Insira a medida da altura: ");
-                                double alturaCilindro = leia.nextDouble();
-                                if (raio <= 0 || alturaCilindro <= 0) {
-                                    throw new IllegalArgumentException("O número deve ser maior que zero.");
-                                } else {
-                                    Cilindro cilindro = new Cilindro(raio, alturaCilindro);
-                                    System.out.println(cilindro.calcularVolume());
-                                    System.out.println(cilindro.calcularAreaSuperficial());
-                                    System.out.println(cilindro.retornaResumoForma(10));
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Entrada inválida. Certifique-se de inserir um número positivo.");
-                                leia.nextLine();
-                            }
-                        }
-
-
-                    case 4:
-                        while (true) {
-                            try {
-                                System.out.println(nome + ", insira a medida do raio do cone: ");
-                                double raioCone = leia.nextDouble();
-
-                                System.out.println("Insira a medida da altura: ");
-                                double alturaCone = leia.nextDouble();
-                                if (raioCone <= 0 || alturaCone <= 0) {
-                                    throw new IllegalArgumentException("O número deve ser maior que zero.");
-                                } else {
-                                    Cone cone = new Cone(raioCone, alturaCone);
-                                    System.out.println(cone.calcularVolume());
-                                    System.out.println(cone.calcularAreaSuperficial());
-                                    System.out.println(cone.retornaResumoForma(10));
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Entrada inválida. Certifique-se de inserir um número positivo.");
-                                leia.nextLine();
-                            }
-                        }
-
-
-                    case 5:
-                        while (true) {
-                            try {
-                                System.out.println(nome + ", insira a medida da aresta da base da pirâmide: ");
-                                double arestaBase = leia.nextDouble();
-
-                                System.out.println("Insira a medida da apotema: ");
-                                double apotema = leia.nextDouble();
-
-                                System.out.println("Insira a medida da altura: ");
-                                double alturaPiramide = leia.nextDouble();
-                                if (arestaBase <= 0 || apotema <= 0 || alturaPiramide <= 0) {
-                                    throw new IllegalArgumentException("O número deve ser maior que zero.");
-                                } else {
-                                    PiramideBaseQuadrada piramideBaseQuadrada = new PiramideBaseQuadrada(arestaBase, apotema, alturaPiramide);
-                                    System.out.println(piramideBaseQuadrada.calcularVolume());
-                                    System.out.println(piramideBaseQuadrada.calcularAreaSuperficial());
-                                    System.out.println(piramideBaseQuadrada.retornaResumoForma(10));
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Entrada inválida. Certifique-se de inserir um número positivo.");
-                                leia.nextLine();
-                            }
-                        }
-
-                    case 6:
-                        while (true) {
-                            try {
-                                System.out.println(nome + ", insira o raio da esfera: ");
-                                double raioEsfera = leia.nextDouble();
-                                if (raioEsfera <= 0) {
-                                    throw new IllegalArgumentException("O número deve ser maior que zero.");
-                                } else {
-                                    Esfera esfera = new Esfera(raioEsfera);
-                                    System.out.println(esfera.calcularVolume());
-                                    System.out.println(esfera.calcularAreaSuperficial());
-                                    System.out.println(esfera.retornaResumoForma(10));
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Entrada inválida. Certifique-se de inserir um número positivo.");
-                                leia.nextLine();
-                            }
-                        }
-
-
-                    case 7:
                         break;
+
+                        case 6:
+
+                            //mensagem para usuário
+                            System.out.print(" Obrigada por usar nossa aplicação!");
+
+                            //finaliza o programa
+                            System.exit(0);
+                        default:
+
+                            //quando não entra com uma opção válida
+                            System.out.print("Entre com uma opção válida!!");
+                            continue;
+                    }
+                } else if(tipoFigura ==2){
+                    System.out.print(" Bem-Vindo: " + nome + "\n\n Escolha umas das opções abaixo para calcúlo");
+                    System.out.print("\n 1 - Cubo\n 2 - Paralelepípedo\n 3 - Esfera\n 4 - Pirâmide de Base Quadrada\n 5 - Cilindro\n 6 - Cone\n 7 - Sair");
+                    System.out.print("\n Entre com a opção: ");
+                    tipoFiguraEspacial = leia.nextInt();
+
+
+                    switch (tipoFiguraEspacial) {
+                        case 1: // Cubo
+                            // Declaração das variáveis
+                            double arestaCubo;
+
+                            // Entrada dos dados
+                            System.out.print("Entre com a aresta do cubo: ");
+                            arestaCubo = leia.nextDouble();
+
+                            // Criação do objeto Cubo
+                            Cubo cubo = new Cubo(arestaCubo);
+
+                            // Saída na tela com a chamada dos métodos
+                            System.out.print("\nÁrea da superfície: " + cubo.calcularAreaSuperficial());
+                            System.out.print("\nVolume: " + cubo.calcularVolume());
+                            System.out.print(cubo.resumoCubo(2));
+                            break;
+
+                        case 2: // Paralelepípedo
+                            // Declaração das variáveis
+                            double ladoA, ladoB, ladoC;
+
+                            // Entrada dos dados
+                            System.out.print("Entre com o lado A do paralelepípedo: ");
+                            ladoA = leia.nextDouble();
+                            System.out.print("Entre com o lado B do paralelepípedo: ");
+                            ladoB = leia.nextDouble();
+                            System.out.print("Entre com o lado C do paralelepípedo: ");
+                            ladoC = leia.nextDouble();
+
+                            // Criação do objeto Paralelepípedo
+                            Paralelepipedo paralelepipedo = new Paralelepipedo(ladoA, ladoB, ladoC);
+
+                            // Saída na tela com a chamada dos métodos
+                            System.out.print("\nÁrea da superfície: " + paralelepipedo.calcularAreaSuperficial());
+                            System.out.print("\nVolume: " + paralelepipedo.calcularVolume());
+                            System.out.print(paralelepipedo.resumoParalelepipedo(3));
+                            break;
+
+                        case 3: // Esfera
+                            // Declaração da variável
+                            double raioEsfera;
+
+                            // Entrada dos dados
+                            System.out.print("Entre com o raio da esfera: ");
+                            raioEsfera = leia.nextDouble();
+
+                            // Criação do objeto Esfera
+                            Esfera esfera = new Esfera(raioEsfera);
+
+                            // Saída na tela com a chamada dos métodos
+                            System.out.print("\nÁrea da superfície: " + esfera.calcularAreaSuperficial());
+                            System.out.print("\nVolume: " + esfera.calcularVolume());
+                            System.out.print(esfera.resumoEsfera(3));
+                            break;
+
+                        case 4: // Pirâmide de Base Quadrada
+                            // Declaração das variáveis
+                            double ladoBase, alturaPiramide;
+
+                            // Entrada dos dados
+                            System.out.print("Entre com o lado da base da pirâmide quadrada: ");
+                            ladoBase = leia.nextDouble();
+                            System.out.print("Entre com a altura da pirâmide: ");
+                            alturaPiramide = leia.nextDouble();
+
+                            // Criação do objeto PirâmideBaseQuadrada
+                            PiramideBaseQuadrada piramideBaseQuadrada = new PiramideBaseQuadrada(ladoBase, alturaPiramide);
+
+                            // Saída na tela com a chamada dos métodos
+                            System.out.print("\nÁrea da superfície: " + piramideBaseQuadrada.calcularAreaSuperficial());
+                            System.out.print("\nVolume: " + piramideBaseQuadrada.calcularVolume());
+                            System.out.print(piramideBaseQuadrada.resumoPiramideBaseQuadrada(3));
+                            break;
+
+                        case 5: // Cilindro
+                            // Declaração das variáveis
+                            double raioBaseCilindro, alturaCilindro;
+
+                            // Entrada dos dados
+                            System.out.print("Entre com o raio da base do cilindro: ");
+                            raioBaseCilindro = leia.nextDouble();
+                            System.out.print("Entre com a altura do cilindro: ");
+                            alturaCilindro = leia.nextDouble();
+
+                            // Criação do objeto Cilindro
+                            Cilindro cilindro = new Cilindro(raioBaseCilindro, alturaCilindro);
+
+                            // Saída na tela com a chamada dos métodos
+                            System.out.print("\nÁrea da superfície: " + cilindro.calcularAreaSuperficial());
+                            System.out.print("\nVolume: " + cilindro.calcularVolume());
+                            System.out.print(cilindro.retornaResumoForma(3));
+                            break;
+                        case 6:
+                            // Declaração das variáveis
+                            double raio, altura;
+
+                            // Entrada dos dados
+                            System.out.print("Entre com o raio da base do cone: ");
+                            raio = leia.nextDouble();
+                            System.out.print("Entre com a altura do cone: ");
+                            altura = leia.nextDouble();
+
+                            // Criação do objeto Cilindro
+                            Cone cone = new Cone(raio, altura);
+
+                            // Saída na tela com a chamada dos métodos
+                            System.out.print("\nÁrea da superfície: " + cone.calcularAreaSuperficial());
+                            System.out.print("\nVolume: " + cone.calcularVolume());
+                            System.out.print(cone.retornaResumoForma(3));
+                            break;
+                        case 7:
+                            System.out.print("Obrigada por usar nossa aplicação!");
+                            System.exit(0);
+                        default:
+                            System.out.print("Entre com uma opção válida!!");
+                            continue;
+                    }
+                }else {
+                    System.out.print("Entre com um número válido!");
                 }
+            }catch (InputMismatchException e){
+                System.out.print("Você entrou com caracter mas o programa só aceita número!Tente novamente");
+                break;
             }
+        continue;
         }
     }
+}

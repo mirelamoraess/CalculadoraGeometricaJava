@@ -18,7 +18,7 @@ public class Paralelepipedo {
         return 2 * ((this.comprimento * this.altura) + (this.altura * this.largura) + (this.comprimento * this.largura));
     }
 
-    String retornaResumoForma(int valor) {
+    String resumoParalelepipedo(int valor) {
         String resumo = String.format("O paralelepipedo  de comprimento %.2f, largura de %.2f e altura %.2f, tem o volume de %.2f e a area Superficial de %.2f", this.comprimento, this.largura, this.altura,this.calcularVolume(), this.calcularAreaSuperficial());
 
         if (valor % 2 == 0) {

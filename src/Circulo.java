@@ -1,29 +1,29 @@
 public class Circulo {
 
-    double raio;
-    final double PI = Math.PI;
+    double calculoArea, calculoPerimetro;
 
-    public Circulo(double raio) {
-        this.raio = raio;
-    }
-    double calcularArea() {
-        return this.PI*Math.pow(this.raio,2);
+    public Circulo(double raio){
+        this.calculoArea = raio;
+        this.calculoPerimetro = raio;
     }
 
-    double calcularPerimetro(){
-        return 2 * this.PI * this.raio;
+    public double calcularArea(){
+        this.calculoArea = Math.PI * Math.pow(this.calculoArea, 2);
+        return  calculoArea;
     }
 
-    String retornaResumoForma(int valor) {
-        String resumo = String.format("O circulo de raio %.2f tem a area de %.2f e o perimetro de %.2f", this.raio, this.calcularArea(), this.calcularPerimetro());
+    public double calcularPerimetro(){
+        this.calculoPerimetro = 2 * Math.PI * this.calculoPerimetro;
 
-        if (valor % 2 == 0) {
+        return calculoPerimetro;
+    }
+
+    public String resumoCirculo(int numero){
+        String resumo = String.format("\nA área do circulo é: %.2f\nO perímetro do circulo é: %.2f\n", this.calculoArea, this.calculoPerimetro);
+
+        if (resumo.length() %2 ==0){
             return resumo.toUpperCase();
         }
-        return resumo.toLowerCase();
-
+            return resumo.toLowerCase();
     }
-
-
 }
-

@@ -15,7 +15,7 @@ public class Esfera {
         return (4 * this.PI) * (Math.pow(this.raio, 2));
     }
 
-    String retornaResumoForma(int valor) {
+    String resumoEsfera(int valor) {
         String resumo = String.format("A esfera de raio %.2f tem o volume de %.2f e a area superficial de %.2f", this.raio, this.calcularVolume(), this.calcularAreaSuperficial());
 
         if (valor % 2 == 0) {

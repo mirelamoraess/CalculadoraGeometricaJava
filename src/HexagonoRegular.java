@@ -1,26 +1,25 @@
 public class HexagonoRegular {
+    double calculoArea, calculoPerimetro;
 
-    double ladoHex;
-
-    public HexagonoRegular(double lado) {
-        this.ladoHex = lado;
+    public HexagonoRegular(double ladoHexagono){
+        this.calculoArea = ladoHexagono;
+        this.calculoPerimetro = ladoHexagono;
     }
 
-    double calcularArea (){
-        return  6 * this.ladoHex * 0.75;
+    public double calcularArea(){
+        return calculoArea;
     }
 
-    double calcularPerimetro(){
-        return this.ladoHex * 6;
+    public double calcularPerimetro(){
+        return  calculoPerimetro;
     }
 
-    String retornaResumoForma(int valor) {
-        String resumo = String.format("O hexagono regular de lado %.2f tem a area de %.2f e o perimetro de %.2f", this.ladoHex, this.calcularArea(), this.calcularPerimetro());
+    public String resumoHexagono(int numero){
+        String resumo = String.format("\nA área do hexagono é: %.2f\nO perímetro do hexagono é: %.2f\n", this.calculoArea, this.calculoPerimetro);
 
-        if (valor % 2 == 0) {
+        if (resumo.length() %2 ==0){
             return resumo.toUpperCase();
         }
         return resumo.toLowerCase();
-
     }
 }
